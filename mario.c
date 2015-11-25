@@ -13,7 +13,7 @@
 int promptInput();
 void insertSpace(int current_row);
 void insertSymbol(int current_row);
-void printDesign(int hieght);
+void printDesign(int height);
 
 // Undeclared variables
 int i, j, k, n, user_input;
@@ -42,10 +42,10 @@ int promptInput()
     return n;
 }
 
-void printDesign(int hieght)
+void printDesign(int height)
 {
     // i is the current row, printed top down.
-    for(i = 0; i < hieght; i++)
+    for(i = 0; i < height; i++)
     {                           
         insertSpace(i);
         insertSymbol(i);
