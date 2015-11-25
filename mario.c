@@ -1,46 +1,62 @@
+/* Generation of a "half pyramid" given user input
+   for the height in blocks, where blocks are
+   represented by #
+   
+   Author: Bill Golembieski
+   Date:   11/23/2015
+   Email:  BillGolembieski@projectu23.com
+*/
 #include <stdio.h>
+#include <cs50.h>
 
 // Function Prototypes
+int promptInput();
 void insertSpace(int current_row);
 void insertSymbol(int current_row);
-void printHalfPyramid(int hieght);
-int i,j,k,user_input;
-int top_step_width = 2;
-int retry;
+void printDesign(int hieght);
 
-int main(void) 
+// Undeclared variables
+int i, j, k, n, user_input;
+
+// Declared Variables
+int top_width = 2;
+
+int main(void)
 {
-do
-{
-printf("Height: ");
-scanf("%i", user_input);
-
-if (user_input < 1)
-    retry == 1;
-else
-    retry == 0;
-}
-while(retry == 1);
-
-printHalfPyramid(user_input);
-return 0;
+    user_input = promptInput();
+    printDesign(user_input);
+    return 0;
 }
 
-void printHalfPyramid(int hieght)
+int promptInput()
 {
-    for(i = 0; i < hieght; i++)                     // i = current row being printed
-{                                                   // top down.
-    insertSpace(i);
-    insertSymbol(i);
-    printf("\n");
+    // Prompt User for an int between 1 and 23
+    do
+    {
+        printf("Height: ");
+        n = GetInt();     
+    }
+    while(n > 23 || n < 1);  
+    
+    // Return user input
+    return n;
 }
+
+void printDesign(int hieght)
+{
+    // i is the current row, printed top down.
+    for(i = 0; i < hieght; i++)
+    {                           
+        insertSpace(i);
+        insertSymbol(i);
+        printf("\n");
+    }
 }
 void insertSpace(int current_row)
 {
     // Inserts the correct number of spaces to right align.
     // This function not needed if left aligning #'s.
-    
-    for(j = 0; j < (user_input - (current_row + 1)); j++)  // Height - (Row + 1)
+    for(j = 0; j < (user_input - (current_row + 1)); j++)
     {
         printf(" ");
     }
@@ -50,7 +66,7 @@ void insertSymbol(int current_row)
 {
     // Inserts the correct number of #'s starting with
     // the first row having 2 #'s, then 
-    for(k = 0; k < (current_row + top_step_width); k++)
+    for(k = 0; k < (current_row + top_width); k++)
     {
         printf("#");
     }
